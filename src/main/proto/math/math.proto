@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package greet;
+
+option java_package = "com.proto.math";
+option java_multiple_files = true;
+
+message Add {
+  int32 addend = 1;
+  int32 augend = 2;
+}
+
+message AddRequest {
+  Add add = 1;
+}
+
+message AddResponse {
+  int32 result = 1;
+}
+
+message DecompRequest{
+  int32 value = 1;
+}
+
+message DecompResponse {
+  int32 result = 1;
+}
+
+message AverageRequest{
+  int32 value = 1;
+}
+
+message AverageResponse {
+  double result = 1;
+}
+
+service CalculatorService {
+  rpc Add(AddRequest) returns (AddResponse) {};
+  rpc PrimeDecomp(DecompRequest) returns (stream DecompResponse){};
+  rpc ComputeAverage(stream AverageRequest) returns (AverageResponse){};
+}
